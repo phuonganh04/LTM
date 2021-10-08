@@ -122,7 +122,21 @@ public class Server {
         String[] infor = data[1].split("\\s");
  
         JDBCConnection con = new JDBCConnection(infor[0], infor[1]);
-        con.ConnectDB();
+        
+        if(con.ConnectDB()){
+            msg = "Đăng nhập thành công";
+        }
+        else msg = "Đăng nhập thất bại";
+        
+        for (DatagramPacket item : listSK) {
+            if (!(item.getAddress().equals(receiveServer.clientIP) && item.getPort() == receiveServer.clientPort)) {
+                try {
+                    senderServer.sendData(msg, server, item.getAddress(), item.getPort());
+                } catch (IOException ex) {
+                    Logger.getLogger(Server.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
     }
 
     
