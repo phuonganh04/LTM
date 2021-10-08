@@ -17,6 +17,8 @@ import view.scene.Signup;
  *
  * @author whiwf
  */
+
+//test Merge nhé
 public class Client {
 
     public enum SceneName {

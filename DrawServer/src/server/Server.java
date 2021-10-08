@@ -118,8 +118,10 @@ public class Server {
 
     private void handleReceiveInformation(String msg) {
 
-        String[] infor = msg.split(";");
-        JDBCConnection con = new JDBCConnection(infor[1], infor[2]);
+        String[] data = msg.split("\\;");
+        String[] infor = data[1].split("\\s");
+ 
+        JDBCConnection con = new JDBCConnection(infor[0], infor[1]);
         con.ConnectDB();
     }
 
